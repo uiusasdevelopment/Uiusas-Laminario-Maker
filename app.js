@@ -713,7 +713,7 @@ class LaminarioApp {
                 type: 'sumario',
                 html: `
                     <div class="page-content page-sumario">
-                        <h2 contenteditable="true">Sumário ${chunks.length > 1 ? \`(Parte \${idx + 1})\` : ''}</h2>
+                        <h2 contenteditable="true">Sumário ${chunks.length > 1 ? `(Parte ${idx + 1})` : ''}</h2>
                         <ul class="toc-list">
                             ${listHtml}
                         </ul>
