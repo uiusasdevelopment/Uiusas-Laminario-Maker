@@ -148,6 +148,9 @@
                     <button onclick="app.addPage('lamina-3img')"><i class="fas fa-th-large"></i> 3 Lâminas</button>
                     <button onclick="app.addPage('lamina-4img')"><i class="fas fa-th"></i> 4 Lâminas</button>
                 </div>
+                <button class="btn primary" style="width: 100%; margin-top: 10px; padding: 10px; background: var(--ui-accent); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: 600;" onclick="app.generateTOC()">
+                    <i class="fas fa-magic"></i> Auto-Gerar Sumário
+                </button>
             </div>
 
             <div class="control-group" style="flex-grow: 1; display: flex; flex-direction: column;">
@@ -157,7 +160,16 @@
                 </ul>
             </div>
 
-            <div class="sidebar-footer">
+            <div class="sidebar-footer" style="display: flex; flex-direction: column; gap: 8px;">
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn secondary" style="flex: 1; padding: 10px; background: var(--ui-bg); color: var(--ui-text); border: 1px solid var(--ui-border); border-radius: 5px; cursor: pointer;" onclick="app.exportJSON()">
+                        <i class="fas fa-save"></i> Salvar
+                    </button>
+                    <label class="btn secondary" style="flex: 1; padding: 10px; background: var(--ui-bg); color: var(--ui-text); border: 1px solid var(--ui-border); border-radius: 5px; cursor: pointer; text-align: center;">
+                        <i class="fas fa-folder-open"></i> Abrir
+                        <input type="file" id="import-json-input" accept=".json" style="display: none;" onchange="app.importJSON(event)">
+                    </label>
+                </div>
                 <button class="export-btn" onclick="app.exportPDF()">
                     <i class="fas fa-file-pdf"></i> Exportar PDF
                 </button>

@@ -212,9 +212,9 @@ class LaminarioApp {
                 </div>
             `;
 
-            let contentHtml = '';
+            let contentHtml = page.html || '';
 
-            if (page.type === 'capa') {
+            if (!page.html && page.type === 'capa') {
                 contentHtml = `
                     <div class="page-content page-capa">
                         <div class="university-header" style="display:flex; flex-direction:column; align-items:center; gap:20px;">
@@ -240,7 +240,7 @@ class LaminarioApp {
                         <div class="footer-city" contenteditable="true" style="margin-top: 50px; font-weight: 500; font-size: 1.1rem; text-align: center;">Campina Grande, PB</div>
                     </div>
                 `;
-            } else if (page.type === 'sumario') {
+            } else if (!page.html && page.type === 'sumario') {
                 contentHtml = `
                     <div class="page-content page-sumario">
                         <h2 contenteditable="true">Sumário</h2>
@@ -253,7 +253,7 @@ class LaminarioApp {
                         </ul>
                     </div>
                 `;
-            } else if (page.type === 'lamina-1img') {
+            } else if (!page.html && page.type === 'lamina-1img') {
                 contentHtml = `
                     <div class="page-content lamina-layout-1img">
                         <div class="page-header">
@@ -275,7 +275,7 @@ class LaminarioApp {
                         <div class="page-number">${pageNum}</div>
                     </div>
                 `;
-            } else if (page.type === 'lamina-2img') {
+            } else if (!page.html && page.type === 'lamina-2img') {
                 contentHtml = `
                     <div class="page-content lamina-layout-2img">
                         <div class="page-header">
@@ -303,7 +303,7 @@ class LaminarioApp {
                         <div class="page-number">${pageNum}</div>
                     </div>
                 `;
-            } else if (page.type === 'lamina-3img') {
+            } else if (!page.html && page.type === 'lamina-3img') {
                 contentHtml = `
                     <div class="page-content lamina-layout-3img">
                         <div class="page-header">
@@ -337,7 +337,7 @@ class LaminarioApp {
                         <div class="page-number">${pageNum}</div>
                     </div>
                 `;
-            } else if (page.type === 'lamina-4img') {
+            } else if (!page.html && page.type === 'lamina-4img') {
                 contentHtml = `
                     <div class="page-content lamina-layout-4img">
                         <div class="page-header" style="margin-bottom: 25px;">
@@ -578,6 +578,152 @@ class LaminarioApp {
                 editables.forEach(el => el.setAttribute('contenteditable', 'true'));
             });
         }, 300);
+    }
+
+    exportJSON() {
+        this.syncDOMtoState();
+
+        const projectData = {
+            theme: this.themeSelector.value,
+            shape: this.shapeSelector.value,
+            customColors: {
+                bg: this.bgColorPicker.value,
+                panel: this.panelColorPicker.value,
+                accent: this.accentColorPicker.value,
+                title: this.titleColorPicker.value,
+                text: this.textColorPicker.value,
+                frame: this.frameColorPicker.value
+            },
+            fontSize: this.fontSizeSlider.value,
+            pages: this.pages
+        };
+
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(projectData));
+        const dlAnchorElem = document.createElement('a');
+        dlAnchorElem.setAttribute("href", dataStr);
+        dlAnchorElem.setAttribute("download", "meu-laminario.json");
+        dlAnchorElem.click();
+    }
+
+    importJSON(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            try {
+                const projectData = JSON.parse(e.target.result);
+                
+                if (projectData.theme) {
+                    this.themeSelector.value = projectData.theme;
+                    this.themeSelector.dispatchEvent(new Event('change'));
+                }
+                if (projectData.shape) {
+                    this.shapeSelector.value = projectData.shape;
+                    this.shapeSelector.dispatchEvent(new Event('change'));
+                }
+                if (projectData.customColors) {
+                    this.bgColorPicker.value = projectData.customColors.bg;
+                    this.panelColorPicker.value = projectData.customColors.panel;
+                    this.accentColorPicker.value = projectData.customColors.accent;
+                    this.titleColorPicker.value = projectData.customColors.title;
+                    this.textColorPicker.value = projectData.customColors.text;
+                    this.frameColorPicker.value = projectData.customColors.frame;
+                    
+                    ['bg', 'panel', 'accent', 'title', 'text', 'frame'].forEach(id => {
+                        this[id + 'ColorPicker'].dispatchEvent(new Event('input'));
+                    });
+                }
+                if (projectData.fontSize) {
+                    this.fontSizeSlider.value = projectData.fontSize;
+                    this.fontSizeSlider.dispatchEvent(new Event('input'));
+                }
+
+                if (projectData.pages && Array.isArray(projectData.pages)) {
+                    this.pages = projectData.pages;
+                    this.renderPages();
+                }
+            } catch (err) {
+                alert('Erro ao carregar o projeto. O arquivo pode estar corrompido.');
+                console.error(err);
+            }
+        };
+        reader.readAsText(file);
+        event.target.value = '';
+    }
+
+    syncDOMtoState() {
+        const pageElements = this.documentPreview.querySelectorAll('.doc-page');
+        pageElements.forEach((el, index) => {
+            if (this.pages[index]) {
+                const pageContent = el.querySelector('.page-content');
+                if (pageContent) {
+                    this.pages[index].html = pageContent.outerHTML;
+                }
+            }
+        });
+    }
+
+    generateTOC() {
+        this.syncDOMtoState();
+        
+        const tocItems = [];
+        let pageNumCounter = 1;
+        
+        const pageElements = this.documentPreview.querySelectorAll('.doc-page');
+        pageElements.forEach((pageEl, index) => {
+            const pageData = this.pages[index];
+            if (pageData && pageData.type.startsWith('lamina')) {
+                const titleEl = pageEl.querySelector('.page-header h2');
+                const title = titleEl ? titleEl.innerText.trim() : 'Sem Título';
+                const numEl = pageEl.querySelector('.page-number');
+                let pageNumStr = numEl ? numEl.innerText.trim() : String(pageNumCounter).padStart(2, '0');
+                
+                tocItems.push({ title, pageNum: pageNumStr });
+            }
+            pageNumCounter++;
+        });
+
+        if (tocItems.length === 0) {
+            alert("Nenhuma lâmina encontrada para gerar o sumário. Adicione lâminas primeiro.");
+            return;
+        }
+
+        this.pages = this.pages.filter(p => !p.type.startsWith('sumario'));
+
+        const CHUNK_SIZE = 15;
+        const chunks = [];
+        for (let i = 0; i < tocItems.length; i += CHUNK_SIZE) {
+            chunks.push(tocItems.slice(i, i + CHUNK_SIZE));
+        }
+
+        const capaIndex = this.pages.findIndex(p => p.type === 'capa');
+        const insertIndex = capaIndex !== -1 ? capaIndex + 1 : 0;
+
+        const newSumarioPages = chunks.map((chunk, idx) => {
+            const listHtml = chunk.map(item => `
+                <li class="toc-item">
+                    <span contenteditable="true">${item.title}</span> 
+                    <span contenteditable="true">${item.pageNum}</span>
+                </li>
+            `).join('');
+
+            return {
+                id: 'sumario_' + Date.now() + '_' + idx,
+                type: 'sumario',
+                html: `
+                    <div class="page-content page-sumario">
+                        <h2 contenteditable="true">Sumário ${chunks.length > 1 ? \`(Parte \${idx + 1})\` : ''}</h2>
+                        <ul class="toc-list">
+                            ${listHtml}
+                        </ul>
+                    </div>
+                `
+            };
+        });
+
+        this.pages.splice(insertIndex, 0, ...newSumarioPages);
+        this.renderPages();
     }
 }
 
