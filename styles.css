@@ -1,0 +1,2677 @@
+/* CSS Variables & Themes */
+:root {
+    /* UI Dashboard Colors */
+    --ui-bg: #1e1e24;
+    --ui-panel: #2b2b36;
+    --ui-border: #3f3f5a;
+    --ui-text: #e0e0e0;
+    --ui-text-muted: #9ba1a6;
+    --ui-accent: #625df5;
+    --ui-accent-hover: #7b77ff;
+
+    /* Base Document Colors */
+    --page-bg: #ffffff;
+    --page-text: #333333;
+    --page-title: #111111;
+    --page-accent: #007bff;
+    --font-heading: 'Inter', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* A4 Size Ratio (aprox) */
+    --doc-width: 794px;
+    --doc-height: 1123px;
+
+    --zoom: 1;
+}
+
+/* MODERNO THEME */
+body[data-theme="moderno"] {
+    --page-bg: #ffffff;
+    --page-text: #4b5563;
+    --page-title: #111827;
+    --page-accent: #3b82f6;
+    --font-heading: 'Inter', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --circle-border: none;
+    --circle-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --circle-radius: 20px;
+    --clip-shape: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+    --page-pattern: radial-gradient(var(--page-text) 1px, transparent 1px);
+    --page-pattern-size: 30px 30px;
+    --page-pattern-opacity: 0.04;
+}
+
+/* BELLE EPOQUE THEME */
+body[data-theme="belle-epoque"] {
+    --page-bg: #fdfaf3;
+    --page-text: #4a3b32;
+    --page-title: #2c1e16;
+    --page-accent: #b89876;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Playfair Display', serif;
+    --circle-border: 4px solid var(--page-accent);
+    --circle-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    --circle-radius: 0;
+    --clip-shape: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    --page-pattern: linear-gradient(45deg, var(--page-accent) 25%, transparent 25%, transparent 75%, var(--page-accent) 75%, var(--page-accent)), linear-gradient(45deg, var(--page-accent) 25%, transparent 25%, transparent 75%, var(--page-accent) 75%, var(--page-accent));
+    --page-pattern-size: 40px 40px;
+    --page-pattern-opacity: 0.03;
+}
+
+/* CYBERPUNK THEME */
+body[data-theme="cyberpunk"] {
+    --page-bg: #09090b;
+    --page-text: #c8c8c8;
+    --page-title: #fdee00;
+    --page-accent: #ff003c;
+    --page-frame: #00f0ff;
+    --font-heading: 'Orbitron', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --circle-border: 3px solid var(--page-frame);
+    --circle-shadow: 0 0 20px var(--page-frame);
+    --page-shadow: inset 0 0 0 2px var(--page-accent);
+    --circle-radius: 0;
+    --clip-shape: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    --page-pattern: linear-gradient(0deg, transparent 24%, var(--page-text) 25%, var(--page-text) 26%, transparent 27%, transparent 74%, var(--page-text) 75%, var(--page-text) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, var(--page-text) 25%, var(--page-text) 26%, transparent 27%, transparent 74%, var(--page-text) 75%, var(--page-text) 76%, transparent 77%, transparent);
+    --page-pattern-size: 50px 50px;
+    --page-pattern-opacity: 0.05;
+}
+
+/* MINIMALISTA THEME */
+body[data-theme="minimalista"] {
+    --page-bg: #fafafa;
+    --page-text: #555555;
+    --page-title: #1a1a1a;
+    --page-accent: #1a1a1a;
+    --font-heading: 'Inter', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --circle-border: 1px solid #eeeeee;
+    --circle-shadow: none;
+    --circle-radius: 0;
+    --clip-shape: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+    --page-pattern: none;
+}
+
+/* Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--ui-bg);
+    color: var(--ui-text);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* UI: Sidebar */
+.sidebar {
+    width: 340px;
+    background-color: var(--ui-panel);
+    border-right: 1px solid var(--ui-border);
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    overflow-y: auto;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 35px;
+    color: var(--ui-accent);
+}
+
+.logo h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: -0.5px;
+}
+
+.logo span {
+    color: var(--ui-accent);
+}
+
+.control-group {
+    margin-bottom: 30px;
+}
+
+.control-group h3 {
+    font-size: 0.85rem;
+    color: var(--ui-text-muted);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--ui-bg);
+    color: white;
+    border: 1px solid var(--ui-border);
+    border-radius: 8px;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    transition: all 0.2s;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+}
+
+select:focus {
+    border-color: var(--ui-accent);
+    box-shadow: 0 0 0 3px rgba(98, 93, 245, 0.2);
+}
+
+.page-types {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.page-types button {
+    background-color: var(--ui-bg);
+    color: var(--ui-text);
+    border: 1px solid var(--ui-border);
+    padding: 15px 10px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.page-types button:hover {
+    background-color: var(--ui-accent);
+    border-color: var(--ui-accent);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(98, 93, 245, 0.3);
+}
+
+.page-types button i {
+    font-size: 1.4rem;
+}
+
+.pages-list {
+    list-style: none;
+    overflow-y: auto;
+    flex-grow: 1;
+    margin-bottom: 15px;
+}
+
+.pages-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.pages-list::-webkit-scrollbar-track {
+    background: var(--ui-bg);
+    border-radius: 3px;
+}
+
+.pages-list::-webkit-scrollbar-thumb {
+    background: var(--ui-border);
+    border-radius: 3px;
+}
+
+.page-item {
+    background-color: var(--ui-bg);
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--ui-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: grab;
+    transition: all 0.2s;
+}
+
+.page-item:hover {
+    border-color: var(--ui-text-muted);
+}
+
+.page-item.active {
+    border-color: var(--ui-accent);
+    background-color: rgba(98, 93, 245, 0.1);
+}
+
+.page-item-title {
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    flex-grow: 1;
+}
+
+.page-item-title i {
+    color: var(--ui-text-muted);
+    cursor: grab;
+}
+
+.page-item-actions button {
+    background: none;
+    border: none;
+    color: var(--ui-text-muted);
+    padding: 6px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.page-item-actions button:hover {
+    color: #ff4757;
+    background-color: rgba(255, 71, 87, 0.1);
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding-top: 15px;
+}
+
+.export-btn {
+    width: 100%;
+    background-color: var(--ui-accent);
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 15px rgba(98, 93, 245, 0.4);
+}
+
+.export-btn:hover {
+    background-color: var(--ui-accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(98, 93, 245, 0.5);
+}
+
+/* UI: Workspace */
+.workspace {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #121218;
+    background-image:
+        radial-gradient(#2b2b36 1px, transparent 1px),
+        radial-gradient(#2b2b36 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: 0 0, 20px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.workspace-header {
+    height: 64px;
+    background-color: rgba(30, 30, 36, 0.85);
+    backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    border-bottom: 1px solid var(--ui-border);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
+}
+
+.instruction {
+    color: var(--ui-text-muted);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.instruction i {
+    color: var(--ui-accent);
+}
+
+.zoom-controls {
+    display: flex;
+    align-items: center;
+    background-color: var(--ui-bg);
+    border-radius: 8px;
+    padding: 6px 12px;
+    border: 1px solid var(--ui-border);
+}
+
+.zoom-controls button {
+    background: none;
+    border: none;
+    color: var(--ui-text);
+    padding: 6px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.zoom-controls button:hover {
+    background-color: var(--ui-panel);
+    color: var(--ui-accent);
+}
+
+#zoom-level {
+    min-width: 50px;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.preview-container {
+    flex-grow: 1;
+    overflow: auto;
+    padding: 100px 40px 60px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.document-preview {
+    transform: scale(var(--zoom));
+    transform-origin: top center;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Document Pages Styles */
+.doc-page {
+    width: var(--doc-width);
+    height: var(--doc-height);
+    background-color: var(--page-bg);
+    color: var(--page-text);
+    position: relative;
+    overflow: hidden;
+    font-family: var(--font-body);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.doc-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    background-image: var(--page-pattern);
+    background-size: var(--page-pattern-size);
+    opacity: var(--page-pattern-opacity);
+    z-index: 0;
+}
+
+body[data-theme="cyberpunk"] .doc-page {
+    box-shadow: var(--page-shadow), 0 25px 50px -12px rgba(0, 0, 0, 1);
+}
+
+/* Background Decorations (Large Shapes per Theme) */
+.doc-page::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--page-accent) 0%, transparent 60%);
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 1;
+}
+
+body[data-theme="moderno"] .doc-page::after {
+    border-radius: 100px;
+    transform: translate(-50%, -50%) rotate(45deg);
+    opacity: 0.03;
+}
+
+body[data-theme="cyberpunk"] .doc-page::after {
+    background: linear-gradient(135deg, transparent, var(--page-accent), transparent);
+    width: 100%;
+    height: 2px;
+    top: auto;
+    bottom: 50px;
+    border-radius: 0;
+    opacity: 0.3;
+}
+
+body[data-theme="belle-epoque"] .doc-page::after {
+    background: transparent;
+    border: 2px solid var(--page-accent);
+    box-shadow: inset 0 0 50px var(--page-accent);
+    opacity: 0.08;
+}
+
+body[data-theme="minimalista"] .doc-page::after {
+    display: none;
+}
+
+.page-content {
+    width: 100%;
+    height: 100%;
+    padding: 70px 80px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+}
+
+[contenteditable="true"] {
+    outline: none;
+    transition: all 0.2s;
+    border-radius: 4px;
+    position: relative;
+}
+
+[contenteditable="true"]:hover {
+    background-color: rgba(128, 128, 128, 0.1);
+    box-shadow: 0 0 0 4px rgba(128, 128, 128, 0.1);
+}
+
+[contenteditable="true"]:focus {
+    background-color: rgba(128, 128, 128, 0.15);
+    box-shadow: 0 0 0 4px rgba(128, 128, 128, 0.15);
+}
+
+body[data-theme="cyberpunk"] [contenteditable="true"]:hover {
+    background-color: rgba(0, 240, 255, 0.1);
+}
+
+/* Page: Capa */
+.page-capa {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.page-capa .title {
+    font-family: var(--font-heading);
+    font-size: 4.5rem;
+    color: var(--page-title);
+    margin-bottom: 25px;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.page-capa .subtitle {
+    font-size: 1.8rem;
+    color: var(--page-accent);
+    margin-bottom: 80px;
+    font-weight: 300;
+}
+
+.page-capa .author {
+    font-size: 1.3rem;
+    margin-top: auto;
+    font-weight: 500;
+}
+
+/* Theme Decorations: Capa */
+body[data-theme="belle-epoque"] .page-capa::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    right: 40px;
+    bottom: 40px;
+    border: 3px double var(--page-accent);
+    pointer-events: none;
+}
+
+body[data-theme="belle-epoque"] .page-capa::after {
+    content: '';
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    right: 50px;
+    bottom: 50px;
+    border: 1px solid var(--page-accent);
+    pointer-events: none;
+}
+
+body[data-theme="cyberpunk"] .page-capa::before {
+    content: 'SYS.INIT // LAMINARIO_v2.0';
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    color: var(--page-accent);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 3px;
+}
+
+body[data-theme="moderno"] .page-capa::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, var(--page-accent) 0%, transparent 70%);
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.page-sumario h2 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    color: var(--page-title);
+    margin-bottom: 50px;
+    border-bottom: 3px solid var(--page-accent);
+    padding-bottom: 15px;
+    display: inline-block;
+    position: relative;
+}
+
+body[data-theme="moderno"] .page-sumario h2::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    height: 3px;
+    width: 30%;
+    background-color: var(--page-title);
+}
+
+body[data-theme="cyberpunk"] .page-sumario h2 {
+    text-shadow: 2px 2px 0px var(--page-accent);
+    border-bottom: none;
+    background: var(--page-bg);
+    padding: 10px 20px;
+    border-left: 5px solid var(--page-accent);
+}
+
+.toc-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.toc-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.3rem;
+    position: relative;
+    font-weight: 500;
+    padding: 10px 15px;
+    transition: all 0.3s;
+    border-radius: 6px;
+}
+
+.toc-item:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+    transform: translateX(5px);
+}
+
+body[data-theme="cyberpunk"] .toc-item:hover {
+    background-color: rgba(0, 240, 255, 0.1);
+    box-shadow: -5px 0 0 var(--page-frame);
+}
+
+.toc-item::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 0;
+    right: 0;
+    border-bottom: 2px dotted var(--page-text);
+    z-index: -1;
+    opacity: 0.3;
+}
+
+.toc-item span {
+    background-color: var(--page-bg);
+    padding: 0 10px;
+}
+
+body[data-theme="cyberpunk"] .toc-item::after {
+    border-color: var(--page-accent);
+    opacity: 0.5;
+}
+
+.page-header {
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 2;
+}
+
+.page-header h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--page-title);
+    position: relative;
+    display: inline-block;
+}
+
+body[data-theme="belle-epoque"] .page-header h2::after {
+    content: '';
+    display: block;
+    width: 60%;
+    height: 2px;
+    background-color: var(--page-accent);
+    margin: 10px auto 0;
+}
+
+body[data-theme="cyberpunk"] .page-header h2 {
+    background-color: var(--page-title);
+    color: var(--page-bg);
+    padding: 5px 15px;
+    border-right: 5px solid var(--page-accent);
+    transform: skew(-10deg);
+}
+
+body[data-theme="cyberpunk"] .page-header h2>* {
+    transform: skew(10deg);
+    display: inline-block;
+}
+
+.layout-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    flex-grow: 1;
+}
+
+.lamina-layout-1img .main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.lamina-layout-2img .main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.image-caption {
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--page-text);
+    opacity: 0.8;
+}
+
+.lamina-layout-3img .main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.lamina-layout-3img .image-container:first-child {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+}
+
+.lamina-layout-3img .image-container:first-child .img-frame {
+    width: 320px;
+    height: 320px;
+}
+
+.lamina-layout-3img .img-frame {
+    width: 260px;
+    height: 260px;
+}
+
+.lamina-layout-4img .main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 25px;
+}
+
+.lamina-layout-4img .img-frame {
+    width: 250px;
+    height: 250px;
+}
+
+/* Circular Img Frames */
+.img-frame {
+    width: 400px;
+    height: 400px;
+    border-radius: var(--circle-radius, 50%);
+    clip-path: var(--clip-shape, none);
+    background-color: var(--page-panel, #f0f0f0);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border: var(--circle-border);
+    border-color: var(--page-frame, inherit);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-container {
+    filter: drop-shadow(var(--circle-shadow));
+}
+
+/* Override Shape Logic Classes */
+body.shape-circle {
+    --circle-radius: 50% !important;
+    --clip-shape: none !important;
+}
+
+body.shape-square {
+    --circle-radius: 0 !important;
+    --clip-shape: none !important;
+}
+
+body.shape-rounded {
+    --circle-radius: 20px !important;
+    --clip-shape: none !important;
+}
+
+body.shape-diamond {
+    --circle-radius: 0 !important;
+    --clip-shape: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%) !important;
+}
+
+body.shape-hexagon {
+    --circle-radius: 0 !important;
+    --clip-shape: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%) !important;
+}
+
+body.shape-pentagon {
+    --circle-radius: 0 !important;
+    --clip-shape: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%) !important;
+}
+
+body.shape-slanted {
+    --circle-radius: 0 !important;
+    --clip-shape: polygon(10% 0, 100% 0, 90% 100%, 0% 100%) !important;
+}
+
+body[data-theme="cyberpunk"] .img-frame {
+    background-color: #1a1a24;
+}
+
+body[data-theme="belle-epoque"] .img-frame {
+    background-color: #eaddcb;
+}
+
+.lamina-layout-2img .img-frame {
+    width: 280px;
+    height: 280px;
+}
+
+.img-frame:hover {
+    transform: scale(1.03);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.img-frame::after {
+    content: '\f0ee';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 3.5rem;
+    color: rgba(0, 0, 0, 0.15);
+    pointer-events: none;
+}
+
+body[data-theme="cyberpunk"] .img-frame::after {
+    color: rgba(0, 240, 255, 0.3);
+}
+
+.img-frame.has-image::after {
+    display: none;
+}
+
+.img-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.text-area {
+    font-size: var(--base-font-size, 1.15rem);
+    line-height: 1.8;
+    text-align: justify;
+    margin-top: 10px;
+    position: relative;
+    z-index: 2;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: var(--page-panel, transparent);
+    transition: background 0.3s;
+}
+
+body[data-theme="moderno"] .text-area {
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+body[data-theme="cyberpunk"] .text-area {
+    background-color: var(--page-panel, rgba(9, 9, 11, 0.7));
+    border-left: 2px solid var(--page-accent);
+    backdrop-filter: blur(10px);
+}
+
+body[data-theme="belle-epoque"] .text-area {
+    background-color: var(--page-bg);
+    border: 1px dotted var(--page-accent);
+}
+
+/* Page Numbers */
+.page-number {
+    position: absolute;
+    bottom: 30px;
+    right: 40px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--page-accent);
+    z-index: 2;
+}
+
+body[data-theme="cyberpunk"] .page-number::before {
+    content: 'PG ';
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+body[data-theme="belle-epoque"] .page-number {
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+/* Modal Cropper */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: var(--ui-panel);
+    width: 800px;
+    max-width: 90vw;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    transform: translateY(20px);
+    transition: transform 0.3s;
+}
+
+.modal.active .modal-content {
+    transform: translateY(0);
+}
+
+.modal-header {
+    padding: 20px 25px;
+    border-bottom: 1px solid var(--ui-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: var(--ui-text-muted);
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: white;
+}
+
+.cropper-container {
+    height: 55vh;
+    background-color: #1a1a24;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cropper-container img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Make the cropper view circular to map to our round frames */
+.cropper-view-box,
+.cropper-face {
+    border-radius: 50%;
+}
+
+.modal-actions {
+    padding: 20px 25px;
+    border-top: 1px solid var(--ui-border);
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+}
+
+.btn.primary {
+    background-color: var(--ui-accent);
+    color: white;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.btn.primary:hover {
+    background-color: var(--ui-accent-hover);
+}
+
+.btn.secondary {
+    background-color: transparent;
+    color: var(--ui-text);
+    border: 1px solid var(--ui-border);
+}
+
+.btn.secondary:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* ==========================================================
+   ============= V I D E O  G A M E  T H E M E S ============
+   ========================================================== */
+
+/* 1. RESIDENT EVIL (Requiem) */
+body[data-theme="resident-evil"] {
+    --page-bg: #111111;
+    --page-accent: #ffffff;
+    --page-title: #ffffff;
+    --page-text: #d4d4d4;
+    --font-heading: 'Courier New', Courier, monospace;
+    --font-body: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    --circle-border: 1px dashed rgba(255, 255, 255, 0.3);
+    --circle-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+    --circle-radius: 2px;
+    --page-pattern: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.03) 4px);
+}
+
+body[data-theme="resident-evil"] .doc-page {
+    box-shadow: inset 0 0 150px rgba(0, 0, 0, 0.9);
+    filter: contrast(1.1) grayscale(0.2);
+}
+
+body[data-theme="resident-evil"] .page-capa .title {
+    font-family: 'Times New Roman', Times, serif;
+    text-transform: uppercase;
+    letter-spacing: 12px;
+    font-size: 3rem;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><path d="M0 50 Q 50 40, 100 50 T 200 50" stroke="white" stroke-width="2" fill="none"/></svg>') no-repeat bottom center;
+    padding-bottom: 20px;
+    background-size: contain;
+}
+
+body[data-theme="resident-evil"] .re-scratch {
+    position: absolute;
+    border-left: 3px solid rgba(255, 255, 255, 0.9);
+    height: 100%;
+    top: 0;
+    left: 40px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    opacity: 0.8;
+}
+
+body[data-theme="resident-evil"] .page-sumario h2,
+body[data-theme="resident-evil"] .page-header h2 {
+    font-family: 'Times New Roman', serif;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+body[data-theme="resident-evil"] .text-area {
+    font-family: 'Courier New', Courier, monospace;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 2. CLAIR OBSCUR (Expedition 33) */
+body[data-theme="clair-obscur"] {
+    --page-bg: #050505;
+    --page-accent: #c4a777;
+    /* Gold */
+    --page-title: #c4a777;
+    --page-text: #e0e0e0;
+    --font-heading: 'Cinzel', serif;
+    --font-body: 'Garamond', 'Times New Roman', serif;
+    --circle-border: 2px solid var(--page-accent);
+    --circle-shadow: 0 0 30px rgba(196, 167, 119, 0.2);
+    --circle-radius: 50%;
+    --page-pattern: radial-gradient(circle at center, transparent 0%, #000 100%);
+}
+
+body[data-theme="clair-obscur"] .doc-page {
+    background-image: var(--page-pattern);
+    color: var(--page-text);
+}
+
+body[data-theme="clair-obscur"] .page-capa .title {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 5rem;
+    color: var(--page-accent);
+    text-shadow: 0 0 15px rgba(196, 167, 119, 0.4);
+    letter-spacing: 5px;
+}
+
+body[data-theme="clair-obscur"] .page-capa .subtitle {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 15px;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    color: #fff;
+    opacity: 0.7;
+}
+
+body[data-theme="clair-obscur"] .co-petals {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background-image:
+        radial-gradient(circle at 20% 30%, rgba(255, 0, 50, 0.1) 0%, transparent 5%),
+        radial-gradient(circle at 80% 60%, rgba(255, 255, 255, 0.1) 0%, transparent 4%),
+        radial-gradient(circle at 40% 80%, rgba(255, 0, 50, 0.05) 0%, transparent 8%);
+}
+
+body[data-theme="clair-obscur"] .page-sumario h2,
+body[data-theme="clair-obscur"] .page-header h2 {
+    font-family: 'Cinzel', serif;
+    color: var(--page-accent);
+    text-align: center;
+    display: block;
+    border-bottom: none;
+    text-shadow: 0 0 10px rgba(196, 167, 119, 0.3);
+}
+
+/* 3. POKEMON LEGENDS Z-A */
+body[data-theme="pokemon"] {
+    --page-bg: #070b0e;
+    --page-accent: #00ffaa;
+    /* Neon Green ZA */
+    --page-frame: #00ccff;
+    /* Cyan UI border */
+    --page-title: #ffffff;
+    --page-text: #e0e0e0;
+    --font-heading: 'Orbitron', monospace;
+    --font-body: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --circle-border: 2px solid var(--page-frame);
+    --circle-shadow: 0 0 20px rgba(0, 255, 170, 0.2);
+    --circle-radius: 5px;
+    --page-pattern: none;
+}
+
+body[data-theme="pokemon"] .doc-page {
+    background-color: var(--page-bg);
+    overflow: hidden;
+}
+
+body[data-theme="pokemon"] .theme-decorations {
+    z-index: 0;
+}
+
+/* 1. Capa (Title Screen equivalent - Pokémon Legends Z-A) */
+body[data-theme="pokemon"] .type-capa .theme-decorations {
+    background:
+        /* Technical subtle grid overlay */
+        linear-gradient(rgba(0, 255, 100, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 100, 0.05) 1px, transparent 1px),
+        /* Dark technical background with green glowing center */
+        radial-gradient(ellipse at 50% 50%, #1a2a22 0%, #0a1118 70%, #05080c 100%);
+    background-size: 30px 30px, 30px 30px, 100% 100%;
+    background-position: center center;
+    box-shadow: inset 0 0 150px rgba(0, 0, 0, 0.8);
+    z-index: 0;
+}
+
+body[data-theme="pokemon"] .type-capa::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 70% 30%, rgba(100, 255, 150, 0.1) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+body[data-theme="pokemon"] .type-capa .pk-stripe {
+    display: none;
+}
+
+body[data-theme="pokemon"] .type-capa .title {
+    color: #4a3482;
+    /* Violet Color */
+    text-shadow: 2px 2px 0px #f8d030;
+    /* Yellow shadow */
+    -webkit-text-stroke: 1px #fff;
+}
+
+/* 2. Sumário (Main Menu equivalent - Dark UI with Green Accent) */
+body[data-theme="pokemon"] .type-sumario .theme-decorations {
+    background: #09121a;
+    /* Dark Blue/Grey */
+}
+
+body[data-theme="pokemon"] .type-sumario .pk-stripe.pk-white {
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 170, 0.1));
+    top: 0;
+    left: 40px;
+    width: 250px;
+    height: 100vh;
+    transform: none;
+    border-right: 2px solid #00ffaa;
+    z-index: -1;
+    display: block;
+}
+
+body[data-theme="pokemon"] .type-sumario .pk-stripe.pk-red {
+    display: none;
+}
+
+body[data-theme="pokemon"] .type-sumario h2,
+body[data-theme="pokemon"] .type-sumario .page-header h2 {
+    background: transparent;
+    color: #ffffff;
+    border-bottom: 2px solid #00ffaa;
+    font-size: 3.5rem;
+    padding: 0 0 10px 0;
+    border-radius: 0;
+}
+
+body[data-theme="pokemon"] .type-sumario .toc-item {
+    background: rgba(10, 20, 25, 0.8);
+    border-radius: 5px;
+    border: 1px solid rgba(0, 204, 255, 0.3);
+    /* Cyan border */
+    color: #e0e0e0;
+    font-weight: 600;
+    text-align: left;
+    backdrop-filter: blur(5px);
+}
+
+body[data-theme="pokemon"] .type-sumario .toc-item span {
+    background: transparent;
+}
+
+/* 3. Lâminas (Party/Pokedex equivalent - Transparent cards over Dark background) */
+body[data-theme="pokemon"] .type-lamina-1img .theme-decorations,
+body[data-theme="pokemon"] .type-lamina-2img .theme-decorations,
+body[data-theme="pokemon"] .type-lamina-3img .theme-decorations,
+body[data-theme="pokemon"] .type-lamina-4img .theme-decorations {
+    background: #0d1a24;
+    /* Deeper technical blue */
+    background-image:
+        linear-gradient(rgba(0, 204, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 204, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+body[data-theme="pokemon"] .type-lamina-1img .pk-stripe.pk-white,
+body[data-theme="pokemon"] .type-lamina-2img .pk-stripe.pk-white,
+body[data-theme="pokemon"] .type-lamina-3img .pk-stripe.pk-white,
+body[data-theme="pokemon"] .type-lamina-4img .pk-stripe.pk-white {
+    display: none;
+}
+
+body[data-theme="pokemon"] .type-lamina-1img .pk-stripe.pk-red,
+body[data-theme="pokemon"] .type-lamina-2img .pk-stripe.pk-red,
+body[data-theme="pokemon"] .type-lamina-3img .pk-stripe.pk-red,
+body[data-theme="pokemon"] .type-lamina-4img .pk-stripe.pk-red {
+    display: none;
+}
+
+body[data-theme="pokemon"] .page-capa {
+    text-align: center;
+    justify-content: center;
+}
+
+body[data-theme="pokemon"] .type-lamina-1img {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+body[data-theme="pokemon"] .type-lamina-1img .layout-container {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    align-items: center;
+    width: 100%;
+}
+
+body[data-theme="pokemon"] .type-lamina-1img .image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+body[data-theme="pokemon"] .type-lamina-1img .text-area {
+    flex: 1;
+    height: auto;
+    min-height: 300px;
+    margin-right: 40px;
+    z-index: 5;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.8);
+    border-radius: 0px 40px 0px 40px;
+}
+
+/* Alternate variation for 2 images */
+body[data-theme="pokemon"] .type-lamina-2img .layout-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+body[data-theme="pokemon"] .type-lamina-2img .image-container {
+    border: 3px solid #333;
+    border-radius: 10px;
+    background: #fff;
+    padding: 10px;
+}
+
+body[data-theme="pokemon"] .page-capa .title {
+    font-weight: 900;
+    font-size: 5rem;
+    color: #ffffff;
+    /* White futuristic text */
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    -webkit-text-stroke: 1.5px #7b9499;
+    /* Silver/Steel stroke */
+    text-shadow:
+        0px 5px 0 #3a4b52,
+        4px 4px 15px rgba(100, 255, 150, 0.4);
+    /* Green subtle glow behind text */
+    background: transparent;
+    padding: 20px 40px;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    display: inline-block;
+    position: relative;
+    z-index: 2;
+}
+
+body[data-theme="pokemon"] .page-capa .title::before {
+    display: none;
+}
+
+body[data-theme="pokemon"] .page-capa .subtitle {
+    color: #aaeebb;
+    /* Pale green text */
+    font-weight: 700;
+    background: rgba(5, 15, 10, 0.6);
+    border: 1px solid rgba(100, 255, 150, 0.3);
+    padding: 8px 25px;
+    border-radius: 30px;
+    display: inline-block;
+    letter-spacing: 2px;
+    box-shadow: 0 0 15px rgba(100, 255, 150, 0.1);
+}
+
+body[data-theme="pokemon"] .img-frame {
+    background-color: var(--page-panel, #111e2b);
+    padding: 10px;
+    border: 3px solid var(--page-frame, #00ccff);
+    box-shadow: inset 0 0 20px rgba(0, 204, 255, 0.1), 0 0 15px rgba(0, 204, 255, 0.2);
+}
+
+body[data-theme="pokemon"] .text-area {
+    background: var(--page-panel, rgba(14, 25, 36, 0.85));
+    color: var(--page-text);
+    border-radius: 8px;
+    border: 1px solid rgba(0, 255, 170, 0.2);
+    border-left: 4px solid #00ffaa;
+    font-weight: 500;
+    backdrop-filter: blur(8px);
+}
+
+body[data-theme="pokemon"] .page-header h2 {
+    background: rgba(14, 25, 36, 0.9);
+    color: #ffffff;
+    padding: 10px 30px;
+    border-radius: 5px;
+    border: 2px solid #00ffaa;
+    border-left: 15px solid #00ffaa;
+    font-weight: 800;
+    text-transform: uppercase;
+    box-shadow: 0 0 20px rgba(0, 255, 170, 0.15);
+}
+
+/* ==========================================================
+   ====== POKEMON SWORD (NEW THEME DEFINITIONS) =============
+   ========================================================== */
+body[data-theme="pokemon-sword"] {
+    --page-bg: #fff;
+    --page-accent: #e6282d;
+    /* Pokemon Red */
+    --page-frame: #fff;
+    /* White UI border */
+    --page-title: #ffffff;
+    --page-text: #333333;
+    --font-heading: 'Orbitron', monospace;
+    --font-body: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --circle-border: 5px solid var(--page-frame);
+    --circle-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    --circle-radius: 50%;
+    --page-pattern: none;
+}
+
+body[data-theme="pokemon-sword"] .doc-page {
+    background-color: var(--page-bg);
+    overflow: hidden;
+}
+
+body[data-theme="pokemon-sword"] .theme-decorations {
+    z-index: 0;
+}
+
+/* 1. Capa (Red Background with white split and white center circles) */
+body[data-theme="pokemon-sword"] .type-capa .theme-decorations {
+    background: #e6282d;
+    background-image: radial-gradient(circle at 100% 100%, #ff5252 0%, transparent 50%), radial-gradient(circle at 0% 0%, #cc0000 0%, transparent 50%);
+}
+
+body[data-theme="pokemon-sword"] .type-capa .pk-stripe.pk-white {
+    background: #fdfdfd;
+    top: -50%;
+    left: 45%;
+    width: 200vw;
+    height: 200vh;
+    transform: rotate(35deg);
+    border-left: 15px solid #333;
+    z-index: -1;
+    display: block;
+}
+
+body[data-theme="pokemon-sword"] .type-capa .title {
+    color: #333;
+    -webkit-text-stroke: 1px #fff;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px 50px;
+    border-radius: 50px;
+    border: 5px solid #e6282d;
+    display: inline-block;
+    position: relative;
+    z-index: 2;
+    font-weight: 900;
+    font-size: 4rem;
+    text-transform: uppercase;
+}
+
+body[data-theme="pokemon-sword"] .type-capa .title::before {
+    display: none;
+}
+
+body[data-theme="pokemon-sword"] .type-capa .subtitle {
+    background: #e6282d;
+    color: #fff;
+    padding: 10px 30px;
+    border-radius: 30px;
+    border: 3px solid #fff;
+    font-weight: bold;
+    display: inline-block;
+}
+
+/* 2. Sumário (Main Menu - Red background with white diagonal ends) */
+body[data-theme="pokemon-sword"] .type-sumario .theme-decorations {
+    background: #e6282d;
+}
+
+body[data-theme="pokemon-sword"] .type-sumario .pk-stripe.pk-white {
+    background: #fdfdfd;
+    top: -50%;
+    left: -20%;
+    width: 200vw;
+    height: 100vh;
+    transform: rotate(35deg);
+    z-index: -1;
+    display: block;
+}
+
+body[data-theme="pokemon-sword"] .type-sumario h2,
+body[data-theme="pokemon-sword"] .page-header h2 {
+    background: #333;
+    color: white;
+    padding: 10px 40px;
+    border-radius: 50px;
+    border: none;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+body[data-theme="pokemon-sword"] .type-sumario .toc-item {
+    background: #fff;
+    border-radius: 50px;
+    border: 4px solid #e6282d;
+    color: #e6282d;
+    font-weight: 800;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 3. Lâminas - PC Box / Party Split */
+body[data-theme="pokemon-sword"] .type-lamina-1img .theme-decorations,
+body[data-theme="pokemon-sword"] .type-lamina-2img .theme-decorations,
+body[data-theme="pokemon-sword"] .type-lamina-3img .theme-decorations,
+body[data-theme="pokemon-sword"] .type-lamina-4img .theme-decorations {
+    background: #fdfdfd;
+    /* White background */
+}
+
+/* Party Menu Red Sidebar */
+body[data-theme="pokemon-sword"] .type-lamina-1img .pk-stripe.pk-red,
+body[data-theme="pokemon-sword"] .type-lamina-2img .pk-stripe.pk-red {
+    background: #e6282d;
+    top: -50%;
+    left: -140vw;
+    width: 200vw;
+    height: 200vh;
+    transform: rotate(20deg);
+    border-right: 15px solid #333;
+    z-index: -1;
+    display: block;
+}
+
+body[data-theme="pokemon-sword"] .type-lamina-1img .pk-stripe.pk-white,
+body[data-theme="pokemon-sword"] .type-lamina-2img .pk-stripe.pk-white {
+    display: none;
+}
+
+/* PC Box Lime Green Sidebar */
+body[data-theme="pokemon-sword"] .type-lamina-3img .pk-stripe.pk-white,
+body[data-theme="pokemon-sword"] .type-lamina-4img .pk-stripe.pk-white {
+    background: #b5f540;
+    /* Lime Green */
+    top: -50%;
+    left: -140vw;
+    width: 200vw;
+    height: 200vh;
+    transform: rotate(20deg);
+    border-right: none;
+    z-index: -1;
+    display: block;
+    box-shadow: 10px 0 20px rgba(0, 0, 0, 0.1);
+}
+
+body[data-theme="pokemon-sword"] .type-lamina-3img .pk-stripe.pk-red,
+body[data-theme="pokemon-sword"] .type-lamina-4img .pk-stripe.pk-red {
+    display: none;
+}
+
+body[data-theme="pokemon-sword"] .img-frame {
+    background-color: white;
+    padding: 10px;
+    border: 3px solid #ddd;
+}
+
+body[data-theme="pokemon-sword"] .text-area {
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+    border-radius: 15px;
+    border: 4px solid #e6282d;
+    font-weight: 600;
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* Alternate specific styling */
+body[data-theme="pokemon-sword"] .page-capa {
+    text-align: center;
+    justify-content: center;
+}
+
+body[data-theme="pokemon-sword"] .type-lamina-1img {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+body[data-theme="pokemon-sword"] .type-lamina-1img .layout-container {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    align-items: center;
+    width: 100%;
+}
+
+body[data-theme="pokemon-sword"] .type-lamina-1img .image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+body[data-theme="pokemon-sword"] .type-lamina-1img .text-area {
+    flex: 1;
+    height: auto;
+    min-height: 300px;
+    margin-right: 40px;
+    z-index: 5;
+}
+
+body[data-theme="pokemon-sword"] .type-lamina-3img .img-frame,
+body[data-theme="pokemon-sword"] .type-lamina-4img .img-frame {
+    border-color: #b5f540;
+}
+
+/* ==========================================================
+   ====== HOLLOW KNIGHT: SILKSONG (NEW THEME) ===============
+   ========================================================== */
+body[data-theme="silksong"] {
+    --page-bg: #0d0605;
+    --page-accent: #ffffff;
+    --page-frame: #e5e5e5;
+    --page-title: #ffffff;
+    --page-text: #f0f0f0;
+    --font-heading: 'Cinzel', serif;
+    --font-body: 'Playfair Display', serif;
+    --circle-border: 2px solid #ffffff;
+    --circle-shadow: 0 0 15px rgba(255, 100, 50, 0.4);
+    --circle-radius: 50%;
+    --page-pattern: none;
+}
+
+body[data-theme="silksong"] .doc-page {
+    background-color: var(--page-bg);
+    overflow: hidden;
+    color: var(--page-text);
+}
+
+body[data-theme="silksong"] .theme-decorations {
+    z-index: 0;
+    background: radial-gradient(circle at 50% 120%, #762014 0%, #300c08 40%, #0d0605 100%);
+}
+
+/* Silksong Embers (CSS Particles) */
+body[data-theme="silksong"] .ss-embers {
+    position: absolute;
+    width: 4px;
+    height: 12px;
+    background: #ffaa55;
+    border-radius: 50%;
+    filter: blur(2px);
+    box-shadow:
+        100px 200px 4px 2px #ff8833, 250px 400px 3px 1px #ffaa55,
+        400px 100px 5px 2px #ff6622, 500px 600px 4px 3px #ffaa55,
+        700px 300px 3px 1px #ff8833, 50px 700px 5px 2px #ff5511,
+        650px 800px 4px 1px #ff7722, 850px 150px 3px 2px #ffaa55,
+        150px 900px 6px 3px #ff5511, 950px 500px 4px 1px #ffaa55;
+    opacity: 0.6;
+    animation: silksong-embers 10s linear infinite;
+    z-index: 1;
+}
+
+@keyframes silksong-embers {
+    0% {
+        transform: translateY(0) scale(1) rotate(15deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translateY(-300px) translateX(-50px) scale(1.2) rotate(25deg);
+    }
+
+    90% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-600px) translateX(50px) scale(0.8) rotate(10deg);
+        opacity: 0;
+    }
+}
+
+body[data-theme="silksong"] .page-capa {
+    text-align: center;
+    justify-content: center;
+}
+
+body[data-theme="silksong"] .page-capa .title {
+    font-size: 5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 40px rgba(255, 100, 50, 0.5);
+    position: relative;
+    padding-bottom: 20px;
+}
+
+body[data-theme="silksong"] .page-capa .title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 20%;
+    width: 60%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #fff, transparent);
+}
+
+body[data-theme="silksong"] .page-capa .title::before {
+    display: none;
+}
+
+body[data-theme="silksong"] .page-capa .subtitle {
+    font-size: 1.8rem;
+    font-family: var(--font-body);
+    font-style: italic;
+    letter-spacing: 2px;
+    margin-top: 15px;
+    color: #e0d5c1;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+body[data-theme="silksong"] .img-frame {
+    background: transparent;
+    padding: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+}
+
+/* Fancy corners for images */
+body[data-theme="silksong"] .img-frame::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    width: 15px;
+    height: 15px;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+}
+
+body[data-theme="silksong"] .img-frame::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    width: 15px;
+    height: 15px;
+    border-bottom: 2px solid #fff;
+    border-right: 2px solid #fff;
+}
+
+body[data-theme="silksong"] .text-area {
+    background: rgba(15, 8, 7, 0.7);
+    color: #f0e6d2;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 25px;
+    font-size: var(--base-font-size, 1.15rem);
+    line-height: 1.7;
+    backdrop-filter: blur(4px);
+    position: relative;
+}
+
+body[data-theme="silksong"] .page-header h2,
+body[data-theme="silksong"] .type-sumario h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    border-bottom: none;
+    position: relative;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 1);
+}
+
+body[data-theme="silksong"] .page-header h2::after,
+body[data-theme="silksong"] .type-sumario h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 30%;
+    width: 40%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #fff, transparent);
+}
+
+body[data-theme="silksong"] .type-sumario .toc-item {
+    background: transparent;
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
+    padding: 15px 5px;
+    color: #fff;
+    font-size: 1.3rem;
+    transition: all 0.3s ease;
+}
+
+body[data-theme="silksong"] .type-sumario .toc-item:hover {
+    background: rgba(255, 60, 20, 0.1);
+    transform: translateX(10px);
+}
+
+
+/* ==========================================================
+   ====== ORDEM PARANORMAL: HEXATOMBE (NEW THEME) ===========
+   ========================================================== */
+body[data-theme="hexatombe"] {
+    --page-bg: #0a0000;
+    --page-accent: #ff0000;
+    --page-frame: #f0f0f0;
+    --page-title: #fc0000;
+    --page-text: #1a1a1a;
+    --font-heading: 'Metal Mania', cursive;
+    --font-body: 'Oswald', sans-serif;
+    --circle-border: 4px solid var(--page-accent);
+    --circle-shadow: 0 0 25px rgba(255, 0, 0, 0.8), inset 0 0 15px rgba(255, 0, 0, 0.5);
+    --circle-radius: 50%;
+    --page-pattern: none;
+}
+
+body[data-theme="hexatombe"] .doc-page {
+    background-color: var(--page-bg);
+    overflow: hidden;
+}
+
+body[data-theme="hexatombe"] .theme-decorations {
+    z-index: 0;
+    background: radial-gradient(circle at 50% 50%, #300000 0%, #0a0000 100%);
+    width: 100%;
+    height: 100%;
+}
+
+/* Hexatombe Paranormal Energy / Blood Vibes */
+body[data-theme="hexatombe"] .hx-grunge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.1) 0px, rgba(0, 0, 0, 0.1) 2px, transparent 2px, transparent 4px),
+        repeating-linear-gradient(-45deg, rgba(255, 0, 0, 0.05) 0px, rgba(255, 0, 0, 0.05) 2px, transparent 2px, transparent 10px);
+    opacity: 0.5;
+    z-index: 0;
+}
+
+body[data-theme="hexatombe"] .hx-vignette {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0 0 180px rgba(5, 0, 0, 0.95);
+    z-index: 2;
+    pointer-events: none;
+}
+
+body[data-theme="hexatombe"] .hx-blood-splatter {
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle at 10% 90%, rgba(255, 0, 0, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 80% 20%, rgba(255, 0, 0, 0.2) 0%, transparent 50%);
+    filter: blur(10px);
+    z-index: 0;
+}
+
+/* Titles */
+body[data-theme="hexatombe"] .page-capa {
+    text-align: center;
+    justify-content: center;
+}
+
+body[data-theme="hexatombe"] .page-capa .title {
+    font-size: 6.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--page-title);
+    -webkit-text-stroke: 1px #220000;
+    text-shadow: 4px 4px 0px #000, 0 0 30px #ff0000, 0 0 60px #ff0000;
+    position: relative;
+    z-index: 3;
+    letter-spacing: 2px;
+    transform: rotate(-1deg);
+}
+
+body[data-theme="hexatombe"] .page-capa .title::before {
+    display: none;
+}
+
+body[data-theme="hexatombe"] .page-capa .subtitle {
+    font-size: 2rem;
+    font-family: 'Special Elite', monospace;
+    font-weight: bold;
+    color: #fff;
+    background: #000;
+    padding: 5px 20px;
+    border: 2px dashed #ff0000;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+    transform: rotate(1deg);
+    display: inline-block;
+    margin-top: 10px;
+}
+
+/* Image Frames (Glowing Red Edge) */
+body[data-theme="hexatombe"] .img-frame {
+    background-color: #000;
+    padding: 4px;
+    border: 3px solid #ff0000;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.6), inset 0 0 20px rgba(255, 0, 0, 0.5);
+    position: relative;
+    z-index: 3;
+}
+
+/* UI Blocks mimicking OP RPG Ability Cards */
+body[data-theme="hexatombe"] .text-area {
+    background: #eef0f2;
+    color: #000;
+    border-top: 4px solid #111;
+    border-bottom: 4px solid #111;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    padding: 15px 20px;
+    font-size: var(--base-font-size, 1.2rem);
+    line-height: 1.5;
+    position: relative;
+    z-index: 3;
+    box-shadow: 0 10px 20px rgba(255, 0, 0, 0.15), 0px -5px 15px rgba(0, 0, 0, 0.8);
+    /* Grungy edge effect simulation */
+    background-image: linear-gradient(0deg, rgba(255, 0, 0, 0.1) 0%, transparent 10%);
+}
+
+/* Decorate the UI Box (Bottom red paranormal glow) */
+body[data-theme="hexatombe"] .text-area::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    width: 100%;
+    height: 15px;
+    background: rgba(255, 0, 0, 0.5);
+    filter: blur(8px);
+    z-index: -1;
+}
+
+/* Headers matching the cards */
+body[data-theme="hexatombe"] .page-header h2,
+body[data-theme="hexatombe"] .type-sumario h2 {
+    font-family: 'Special Elite', monospace;
+    font-size: 2.2rem;
+    background: #eef0f2;
+    color: #000;
+    padding: 10px 20px;
+    border-top: 4px solid #111;
+    border-bottom: 4px solid #111;
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 1);
+    box-shadow: 0 8px 15px rgba(255, 0, 0, 0.3);
+    margin-bottom: 20px;
+    display: inline-block;
+    position: relative;
+    z-index: 3;
+    font-weight: 700;
+}
+
+/* Sumario Items */
+body[data-theme="hexatombe"] .type-sumario .toc-item {
+    background: #111;
+    border-left: 5px solid #ff0000;
+    border-right: 5px solid #ff0000;
+    color: #fff;
+    font-family: 'Special Elite', monospace;
+    font-size: 1.2rem;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+}
+
+body[data-theme="hexatombe"] .type-sumario .toc-item span:last-child {
+    color: #ff0000;
+    font-weight: bold;
+}
+
+/* ==========================================================
+   ====== SINAIS DO OUTRO LADO (NEW THEME) ==================
+   ========================================================== */
+body[data-theme="sinais"] {
+    --page-bg: #030805;
+    --page-accent: #2de27b;
+    --page-frame: #184a2d;
+    --page-title: #ffffff;
+    --page-text: #d4e8d9;
+    --font-heading: 'Adobe Hebrew', serif;
+    --font-body: 'Inter', sans-serif;
+    --circle-border: 3px solid var(--page-accent);
+    --circle-shadow: 0 0 20px rgba(45, 226, 123, 0.5), inset 0 0 10px rgba(45, 226, 123, 0.3);
+    --circle-radius: 5px;
+    --page-pattern: none;
+}
+
+body[data-theme="sinais"] .doc-page {
+    background-color: var(--page-bg);
+    overflow: hidden;
+}
+
+/* Base dark swirling green abyss */
+body[data-theme="sinais"] .theme-decorations {
+    /* Create a deep but clearly green swirling abyss */
+    background: url('assets/bg-sinais.png') center/cover no-repeat, radial-gradient(circle at 60% 50%, #031109 0%, #010604 70%, #0d0106 100%);
+    background-color: #031109;
+    width: 100%;
+    height: 100%;
+}
+
+/* Make text readable on the image background */
+body[data-theme="sinais"] .page-capa .uni-name,
+body[data-theme="sinais"] .page-capa .author-info,
+body[data-theme="sinais"] .page-capa .footer-city {
+    background: rgba(3, 17, 9, 0.7);
+    padding: 15px 25px;
+    border-radius: 8px;
+    border: 1px solid rgba(45, 226, 123, 0.3);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(4px);
+    margin-bottom: 20px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Glitch / Static Scanlines (Subtle + Central Tear) */
+body[data-theme="sinais"] .sn-glitch {
+    display: none;
+    /* Disabled when using real background image */
+}
+
+/* Fluid Nebula Swirls */
+body[data-theme="sinais"] .sn-swirl {
+    display: none;
+    /* Disabled when using real background image */
+}
+
+body[data-theme="sinais"] .sn-vignette {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0 0 160px rgba(0, 5, 2, 0.95);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Titles */
+body[data-theme="sinais"] .page-capa {
+    text-align: center;
+    justify-content: center;
+}
+
+body[data-theme="sinais"] .page-capa .title {
+    font-size: 5.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--page-title);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+        0 0 30px rgba(45, 226, 123, 0.9),
+        0 0 50px rgba(45, 226, 123, 0.6);
+    position: relative;
+    z-index: 3;
+    letter-spacing: 2px;
+    line-height: 1.2;
+}
+
+/* Glitch Title shadow trick */
+body[data-theme="sinais"] .page-capa .title::after {
+    content: attr(data-text);
+    position: absolute;
+    left: -2px;
+    top: 0;
+    font-family: inherit;
+    font-weight: inherit;
+    color: rgba(255, 0, 0, 0.5);
+    mix-blend-mode: screen;
+    z-index: -1;
+    filter: blur(2px);
+    display: none;
+    /* Can be enabled if needed */
+}
+
+body[data-theme="sinais"] .page-capa .title::before {
+    display: none;
+}
+
+body[data-theme="sinais"] .page-capa .subtitle {
+    font-size: 1.6rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    color: #a3e0bd;
+    margin-top: 15px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    z-index: 3;
+    position: relative;
+}
+
+/* Text ID Card appearance */
+body[data-theme="sinais"] .text-area {
+    background: rgba(5, 15, 10, 0.85);
+    color: #d4e8d9;
+    border: 1px solid rgba(45, 226, 123, 0.3);
+    border-left: 5px solid var(--page-accent);
+    padding: 20px;
+    font-size: var(--base-font-size, 1.15rem);
+    line-height: 1.6;
+    position: relative;
+    z-index: 3;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(45, 226, 123, 0.05);
+    backdrop-filter: blur(5px);
+    /* Subtle metallic/scratch texture inside cards */
+    background-image: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.02) 0px, transparent 1px, transparent 5px);
+}
+
+body[data-theme="sinais"] .text-area p {
+    font-family: 'Special Elite', monospace;
+    /* Used for the rough typewriter id card text */
+    letter-spacing: 0.5px;
+}
+
+/* Image Frames */
+body[data-theme="sinais"] .img-frame {
+    background-color: transparent;
+    padding: 0;
+    border: 3px solid rgba(45, 226, 123, 0.5);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8), 0 0 15px rgba(45, 226, 123, 0.2);
+    position: relative;
+    z-index: 3;
+}
+
+/* Sumario / Headers */
+body[data-theme="sinais"] .page-header h2,
+body[data-theme="sinais"] .type-sumario h2 {
+    font-family: 'Adobe Hebrew', serif;
+    font-size: 2.8rem;
+    color: #fff;
+    text-shadow: 0 0 15px rgba(45, 226, 123, 0.8);
+    border-bottom: 2px solid rgba(45, 226, 123, 0.4);
+    position: relative;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+}
+
+/* Sumario Items */
+body[data-theme="sinais"] .type-sumario .toc-item {
+    background: rgba(5, 15, 10, 0.6);
+    border: 1px solid rgba(45, 226, 123, 0.2);
+    border-left: 3px solid var(--page-accent);
+    color: #d4e8d9;
+    font-family: 'Special Elite', monospace;
+    font-size: 1.15rem;
+    padding: 12px 15px;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: space-between;
+    transition: all 0.2s ease;
+}
+
+body[data-theme="sinais"] .type-sumario .toc-item:hover {
+    background: rgba(45, 226, 123, 0.1);
+    border-left: 5px solid var(--page-accent);
+}
+
+body[data-theme="sinais"] .type-sumario .toc-item span:last-child {
+    color: var(--page-accent);
+    font-weight: bold;
+}
+
+body[data-theme="caderno"] {
+    --page-bg: #fffbf5;
+    --page-accent: #f5cca6;
+    --page-title: #222222;
+    --page-text: #333333;
+    --font-heading: 'Inter',
+        sans-serif;
+    --font-body: 'Inter',
+        sans-serif;
+    --circle-border: 1px solid #333;
+    --circle-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    --circle-radius: 50%;
+    --page-pattern: none;
+}
+
+body[data-theme="caderno"] .doc-page {
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.4);
+}
+
+body[data-theme="caderno"] .doc-page::after {
+    display: none;
+}
+
+/* No giant background bubbles */
+
+/* Caderno Layout Overrides */
+body[data-theme="caderno"] .page-capa {
+    align-items: flex-start;
+    text-align: left;
+    padding-left: 280px;
+}
+
+body[data-theme="caderno"] .page-sumario {
+    padding-right: 280px;
+}
+
+body[data-theme="caderno"] .lamina-layout-1img,
+body[data-theme="caderno"] .lamina-layout-2img,
+body[data-theme="caderno"] .lamina-layout-3img,
+body[data-theme="caderno"] .lamina-layout-4img {
+    padding-left: 100px;
+}
+
+body[data-theme="caderno"] .university-header {
+    align-self: center;
+    margin-bottom: 20px;
+}
+
+body[data-theme="caderno"] .title-group {
+    margin: 40px 0;
+}
+
+body[data-theme="caderno"] .title-group .title {
+    font-weight: 500;
+    font-size: 5rem;
+    letter-spacing: -3px;
+}
+
+body[data-theme="caderno"] .title-group .subtitle {
+    font-size: 2.5rem;
+    color: var(--page-text);
+    font-weight: 400;
+    letter-spacing: -1px;
+}
+
+body[data-theme="caderno"] .page-sumario h2::after {
+    display: none;
+}
+
+body[data-theme="caderno"] .page-sumario h2 {
+    border-bottom: none;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 3.5rem;
+}
+
+/* Caderno: Theme Decorations (Bands and Sketched Icons) */
+.theme-decorations {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.decor-band {
+    display: none;
+    position: absolute;
+}
+
+/* Caderno Bands */
+body[data-theme="caderno"] .decor-band {
+    display: block;
+    top: 0;
+    bottom: 0;
+    width: 260px;
+    background-color: var(--page-accent);
+}
+
+body[data-theme="caderno"] .type-capa .decor-band {
+    left: 0;
+}
+
+body[data-theme="caderno"] .type-sumario .decor-band {
+    right: 0;
+    left: auto;
+}
+
+body[data-theme="caderno"] .type-lamina-1img .decor-band,
+body[data-theme="caderno"] .type-lamina-2img .decor-band,
+body[data-theme="caderno"] .type-lamina-3img .decor-band,
+body[data-theme="caderno"] .type-lamina-4img .decor-band {
+    left: 0;
+    width: 40px;
+}
+
+/* Mobile Menu Button - Hidden on Desktop */
+.mobile-menu-btn {
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--ui-accent);
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.mobile-menu-btn:hover {
+    transform: scale(1.1);
+    background-color: var(--ui-accent-hover);
+}
+
+/* ==========================================================
+   ============= RESPONSIVE DESIGN (MOBILE) =================
+   ========================================================== */
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: flex;
+        /* Show floating action button */
+    }
+
+    /* Off-Canvas overlay backdrop */
+    body.sidebar-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(3px);
+        z-index: 99;
+    }
+
+    .app-container {
+        flex-direction: column;
+    }
+
+    /* Off-Canvas Sidebar */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 320px;
+        max-width: 85vw;
+        max-height: 100vh;
+        z-index: 100;
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border-right: 1px solid var(--ui-border);
+        border-bottom: none;
+        box-shadow: 5px 0 25px rgba(0, 0, 0, 0.5);
+    }
+
+    body.sidebar-open .sidebar {
+        transform: translateX(0);
+    }
+
+    .logo {
+        margin-bottom: 25px;
+    }
+
+    .logo h2 {
+        font-size: 1.4rem;
+    }
+
+    .color-pickers {
+        grid-template-columns: 1fr 1fr !important;
+    }
+
+    .color-pickers label[style*="grid-column: span 2"] {
+        grid-column: span 2 !important;
+    }
+
+    .page-types {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .workspace-header {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 15px;
+        gap: 10px;
+        height: auto;
+    }
+
+    .instruction {
+        display: none;
+        /* Hide instruction text on mobile for space */
+    }
+
+    .preview-container {
+        padding: 20px 10px 100px 10px;
+        /* Extra bottom padding for floating button */
+        overflow: auto;
+        align-items: flex-start;
+        justify-content: flex-start;
+        /* Ensure top-left alignment on scroll on mobile */
+    }
+
+    .document-preview {
+        transform-origin: top left;
+        /* Better scaling origin for mobile viewing */
+        margin: 0 auto;
+    }
+
+    .modal-content {
+        width: 95vw;
+        height: auto;
+        max-height: 90vh;
+        margin: 5vh auto;
+    }
+
+    .cropper-container {
+        max-height: 50vh;
+    }
+
+    /* Caderno layout overrides for mobile viewing */
+    body[data-theme="caderno"] .page-capa {
+        padding-left: 200px;
+    }
+
+    body[data-theme="caderno"] .page-sumario {
+        padding-right: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .color-pickers {
+        grid-template-columns: 1fr !important;
+        /* Stack vertically on very small phones */
+    }
+
+    .color-pickers label[style*="grid-column: span 2"] {
+        grid-column: 1 !important;
+    }
+
+    .page-types {
+        grid-template-columns: 1fr;
+    }
+}
+/* NEW THEMES ADDED */
+
+/* VINTAGE MED THEME */
+body[data-theme="vintage-med"] {
+    --page-bg: #f5f0e6;
+    --page-text: #2c3e50;
+    --page-title: #8b0000;
+    --page-accent: #c0392b;
+    --font-heading: 'Special Elite', monospace;
+    --font-body: 'Special Elite', monospace;
+    --circle-border: 2px solid #2980b9;
+    --circle-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --circle-radius: 5px;
+    --clip-shape: none;
+    --page-pattern: repeating-linear-gradient(transparent, transparent 31px, #a0d8ef 31px, #a0d8ef 32px);
+    --page-pattern-size: 100% 32px;
+    --page-pattern-opacity: 0.5;
+}
+
+/* NETTER THEME */
+body[data-theme="netter"] {
+    --page-bg: #f9f6f0;
+    --page-text: #3e3832;
+    --page-title: #2a221b;
+    --page-accent: #8b6b4a;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+    --circle-border: 5px solid #d4c5b3;
+    --circle-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    --circle-radius: 50%;
+    --clip-shape: none;
+    --page-pattern: radial-gradient(#d4c5b3 1px, transparent 1px);
+    --page-pattern-size: 20px 20px;
+    --page-pattern-opacity: 0.1;
+}
+
+/* HITECH THEME */
+body[data-theme="hitech"] {
+    --page-bg: #0a1128;
+    --page-text: #e0e7ff;
+    --page-title: #00f0ff;
+    --page-accent: #00f0ff;
+    --page-frame: #0088ff;
+    --font-heading: 'Orbitron', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --circle-border: 2px solid var(--page-frame);
+    --circle-shadow: 0 0 15px var(--page-frame);
+    --circle-radius: 10px;
+    --clip-shape: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+    --page-pattern: linear-gradient(0deg, transparent 24%, rgba(0, 240, 255, 0.1) 25%, rgba(0, 240, 255, 0.1) 26%, transparent 27%, transparent 74%, rgba(0, 240, 255, 0.1) 75%, rgba(0, 240, 255, 0.1) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(0, 240, 255, 0.1) 25%, rgba(0, 240, 255, 0.1) 26%, transparent 27%, transparent 74%, rgba(0, 240, 255, 0.1) 75%, rgba(0, 240, 255, 0.1) 76%, transparent 77%, transparent);
+    --page-pattern-size: 40px 40px;
+    --page-pattern-opacity: 0.3;
+}
+
+/* PIPBOY THEME */
+body[data-theme="pipboy"] {
+    --page-bg: #051405;
+    --page-text: #4aff4a;
+    --page-title: #4aff4a;
+    --page-accent: #4aff4a;
+    --font-heading: 'Courier New', monospace;
+    --font-body: 'Courier New', monospace;
+    --circle-border: 2px solid #4aff4a;
+    --circle-shadow: 0 0 10px #4aff4a;
+    --circle-radius: 0;
+    --clip-shape: none;
+    --page-pattern: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(74, 255, 74, 0.05) 2px, rgba(74, 255, 74, 0.05) 4px);
+    --page-pattern-size: 100% 4px;
+    --page-pattern-opacity: 1;
+}
+
+/* BLOODBORNE THEME */
+body[data-theme="bloodborne"] {
+    --page-bg: #1a1515;
+    --page-text: #c0b0a0;
+    --page-title: #8b0000;
+    --page-accent: #5e0000;
+    --font-heading: 'Cinzel', serif;
+    --font-body: 'Playfair Display', serif;
+    --circle-border: 3px double #5e0000;
+    --circle-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    --circle-radius: 0;
+    --clip-shape: none;
+    --page-pattern: none;
+}
+
+/* TLOU THEME */
+body[data-theme="tlou"] {
+    --page-bg: #2a2d24;
+    --page-text: #b0c4b1;
+    --page-title: #d4e09b;
+    --page-accent: #788a63;
+    --font-heading: 'Impact', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --circle-border: 3px solid #4a5d23;
+    --circle-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+    --circle-radius: 10px;
+    --clip-shape: polygon(5% 0%, 95% 0%, 100% 5%, 100% 95%, 95% 100%, 5% 100%, 0% 95%, 0% 5%);
+    --page-pattern: radial-gradient(circle, #1f221a 0%, transparent 60%);
+    --page-pattern-size: 100% 100%;
+    --page-pattern-opacity: 0.5;
+}
+
+/* GENSHIN THEME */
+body[data-theme="genshin"] {
+    --page-bg: #faf5eb;
+    --page-text: #595349;
+    --page-title: #d4a351;
+    --page-accent: #8b7355;
+    --font-heading: 'Cinzel', serif;
+    --font-body: 'Inter', sans-serif;
+    --circle-border: 2px solid #d4a351;
+    --circle-shadow: 0 0 15px rgba(212, 163, 81, 0.3);
+    --circle-radius: 50%;
+    --clip-shape: none;
+    --page-pattern: radial-gradient(circle, #d4a351 1px, transparent 1px);
+    --page-pattern-size: 30px 30px;
+    --page-pattern-opacity: 0.2;
+}
+
+/* GRIMORIO THEME */
+body[data-theme="grimorio"] {
+    --page-bg: #4a3b2c;
+    --page-text: #e8dcc4;
+    --page-title: #f4c430;
+    --page-accent: #8b0000;
+    --font-heading: 'Metal Mania', cursive;
+    --font-body: 'Playfair Display', serif;
+    --circle-border: 5px solid #8b0000;
+    --circle-shadow: 0 0 20px #f4c430;
+    --circle-radius: 0;
+    --clip-shape: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    --page-pattern: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.1) 10px, rgba(0,0,0,0.1) 20px);
+    --page-pattern-size: 20px 20px;
+    --page-pattern-opacity: 0.5;
+}
+
+/* TAVERNA THEME */
+body[data-theme="taverna"] {
+    --page-bg: #5c4033;
+    --page-text: #f0e6d2;
+    --page-title: #b8860b;
+    --page-accent: #8b4513;
+    --font-heading: 'Oswald', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --circle-border: 8px ridge #8b4513;
+    --circle-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    --circle-radius: 10px;
+    --clip-shape: none;
+    --page-pattern: none;
+}
+
+/* VAPORWAVE THEME */
+body[data-theme="vaporwave"] {
+    --page-bg: #2a0845;
+    --page-text: #00ffff;
+    --page-title: #ff00ff;
+    --page-accent: #00ffff;
+    --font-heading: 'Inter', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --circle-border: 3px solid #ff00ff;
+    --circle-shadow: 0 0 20px #00ffff;
+    --circle-radius: 0;
+    --clip-shape: none;
+    --page-pattern: linear-gradient(0deg, transparent 24%, rgba(255, 0, 255, 0.3) 25%, rgba(255, 0, 255, 0.3) 26%, transparent 27%, transparent 74%, rgba(255, 0, 255, 0.3) 75%, rgba(255, 0, 255, 0.3) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(0, 255, 255, 0.3) 25%, rgba(0, 255, 255, 0.3) 26%, transparent 27%, transparent 74%, rgba(0, 255, 255, 0.3) 75%, rgba(0, 255, 255, 0.3) 76%, transparent 77%, transparent);
+    --page-pattern-size: 50px 50px;
+    --page-pattern-opacity: 0.5;
+}
+
+/* STEAMPUNK THEME */
+body[data-theme="steampunk"] {
+    --page-bg: #8b5a2b;
+    --page-text: #ffdead;
+    --page-title: #cd853f;
+    --page-accent: #d2691e;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Playfair Display', serif;
+    --circle-border: 10px double #cd853f;
+    --circle-shadow: 0 10px 15px rgba(0,0,0,0.6);
+    --circle-radius: 50%;
+    --clip-shape: none;
+    --page-pattern: radial-gradient(circle, #5c3a21 2px, transparent 2.5px);
+    --page-pattern-size: 20px 20px;
+    --page-pattern-opacity: 0.5;
+}
