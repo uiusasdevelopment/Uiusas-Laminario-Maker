@@ -93,6 +93,10 @@ class LaminarioApp {
             document.documentElement.style.setProperty('--base-font-size', size);
         });
 
+        window.addEventListener('resize', () => this.setAutoZoom());
+        // Initialize mobile zoom if needed
+        setTimeout(() => this.setAutoZoom(), 100);
+
         this.shapeSelector.addEventListener('change', (e) => {
             const shape = e.target.value;
             // Clear all possible override classes first
@@ -112,6 +116,20 @@ class LaminarioApp {
 
         document.documentElement.style.setProperty('--zoom', this.zoomLevel);
         this.zoomDisplay.innerText = Math.round(this.zoomLevel * 100) + '%';
+    }
+
+    setAutoZoom() {
+        if (window.innerWidth <= 768) {
+            const container = document.querySelector('.preview-container');
+            if (!container) return;
+            // A4 is ~794px wide. Calculate ideal zoom.
+            const width = container.clientWidth;
+            const targetZoom = width < 834 ? (width - 40) / 794 : 1;
+            
+            this.zoomLevel = targetZoom;
+            document.documentElement.style.setProperty('--zoom', this.zoomLevel);
+            if (this.zoomDisplay) this.zoomDisplay.innerText = Math.round(this.zoomLevel * 100) + '%';
+        }
     }
 
     generateId() {
